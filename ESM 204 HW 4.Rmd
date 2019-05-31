@@ -6,6 +6,32 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+emissions <- read_csv("HW4Data.csv")
+```
+
+##Part 1 Regressions
+```{r}
+
+model_a1 <- lm(MC_A ~ Abatement, data = emissions, family="linear")
+summary(model_a1) #r square .91
+
+model_b1 <- lm(MC_B ~ Abatement, data = emissions, family="linear")
+summary(model_b1) #r sq .56
+
+model_b2 <- nls(MC_B ~ sqrt(Abatement), data = emissions)#trying nls model but unsure how
+summary(model_b2)
+
+model_c1 <- lm(MC_C ~ Abatement, data = emissions, family="linear")
+summary(model_c1) #r sq .87
+
+model_d1 <- lm(MC_D ~ Abatement, data = emissions, family="linear")
+summary(model_d1)#r sq .54
+
+model_d2 <- nls(MC_B ~ sqrt(Abatement), data = emissions)#trying nls model but unsure how
+summary(model_d2)
+
+
 ```
 

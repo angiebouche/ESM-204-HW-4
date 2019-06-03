@@ -174,3 +174,5 @@ Aggregate_Tax = (617.0287 - 300) /8
 
 ```
 
+##Part 5 
+### A- With a cap and trade market, country X will reduce its emissions by 300 tons overall, leaving 300 tons of carbon emitted. This corresponds with 300 tons of local air pollution. For country Y, if they aren't in a cap and trade program they will continue to emit 300 tons of carbon, which corresponds with 300 tons of air pollution there. 

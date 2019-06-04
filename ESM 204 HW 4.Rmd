@@ -44,13 +44,15 @@ model_d1 <- lm(MC_D ~ Abatement, data = emissions, family="linear")
 summary(model_d1)#r sq .54
 
 #y = 0.25993 x + 9.68751
+```
 
-stargazer(model_a1, model_b1, model_c1, model_d1, type="text", title="Regression Results")
+```{r stargazer, results = 'asis'}
+# Stargazer table
+stargazer_lm <- stargazer(model_a1, model_b1, model_c1, model_d1, type="html", title="Regression Results")
 
 ```
 ###Plot
 ```{r}
-
 ggplot(emissions, aes(x = Abatement, y = MC_A)) + 
   geom_point() +
   stat_smooth(method = "lm", col = "red")+
@@ -75,6 +77,10 @@ ggplot(emissions, aes(x = Abatement, y = MC_D)) +
   ylab("Marginal Cost of Abatement (Sector D)")+
   theme_classic()
 
+
+```
+## Plot 2
+```{r}
 
 ```
 

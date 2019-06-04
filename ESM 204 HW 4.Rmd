@@ -15,6 +15,13 @@ library(Hmisc)
 emissions <- read_csv("HW4Data.csv")
 ```
 
+## Assumptions
+```{r}
+# Current carbon emissions in the sectors are: (A=180, B=200, C=220, and D=300).
+# Sectors A, B, and C are in country X. Sector D is in a different country, Y.
+# Prices are in $/ton and quantities are in tons.
+```
+
 ##Part 1 Regressions
 ```{r}
 
@@ -145,9 +152,12 @@ ggplot(all, aes(x=x, y=y, color=type))+
 ```
 
 
-#$Part 3: Couty X
-### Carbon Cap
+#$Part 3: Country X
+# For each of the following policies derive: 1. the total cost of meeting the target in country X 2. the cost or benefit to each sector and 3. the tax revenue generated
+###  a. Carbon Cap
 ####No tax revenue generated
+
+
 ```{r}
 #MC when 100 tons are abated
 MCa100 = (-0.57684*100) + 95.18672 
@@ -166,13 +176,56 @@ Tc100 = TCa100 +TCb100+ TCc100
 
 ```
 
-### Carbon Tax
+### b. Carbon Tax
 ```{r}
 #Aggreate  MC for tax
 Aggregate_Tax = (617.0287 - 300) /8
+# x= 8y-15.20 or y=(x+15.20)/8
+# MC_abc=(x+15.20)/8 (Sum of MC for a, b, and c)
+MC_abc=(300+15.20)/8
 
+```
 
+### c. Cap and Trade
+```{r}
+# to stop trade two things need to happen
+# 1. every sector needs to have the same abatement cost
+# 2. total abatement needs to equal 300
+
+abate_a = (MC_abc+8.65)/0.57 #84.3
+abate_b = (MC_abc-9.32)/0.2 #150.4
+abate_c = (MC_abc+12.66)/0.78 #66.7
+
+# Check abatement in each sector equals 300
+abate_abc = abate_a +abate_b + abate_c
+```
+
+##Part 4
+```{r}
+# Yes because country's Y MC is lower than sectors A and C of country X
 ```
 
 ##Part 5 
 ### A- With a cap and trade market, country X will reduce its emissions by 300 tons overall, leaving 300 tons of carbon emitted. This corresponds with 300 tons of local air pollution. For country Y, if they aren't in a cap and trade program they will continue to emit 300 tons of carbon, which corresponds with 300 tons of air pollution there. 
+
+```{r}
+# b.
+# First need to calculate how much each sector would emit
+# x = 11.88y-52.46
+# MC_abcd= (x+52.46)/11.88
+MC_abcd= (300+52.46)/11.88
+
+abate_a2 = (MC_abcd+8.65)/0.57 #67.2
+abate_b2 = (MC_abcd-9.32)/0.2 #101.7
+abate_c2 = (MC_abcd+12.66)/0.78 #54.3
+abate_d2 = (MC_abcd-9.69)/0.26 #76.8
+
+# Check total abatement
+abate_abcd = abate_a2+abate_b2+abate_c2+abate_d2
+
+# c. Trade is even more beneficial for country Y because it is also getting health benefits from reducing 76.8 tons of carbon
+```
+
+
+
+

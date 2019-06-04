@@ -11,6 +11,7 @@ library(stargazer)
 library(dplyr)
 library(ggplot2)
 library(Hmisc)
+library(RColorBrewer)
 
 emissions <- read_csv("HW4Data.csv")
 ```
@@ -55,25 +56,25 @@ stargazer_lm <- stargazer(model_a1, model_b1, model_c1, model_d1, type="html", t
 ```{r}
 ggplot(emissions, aes(x = Abatement, y = MC_A)) + 
   geom_point() +
-  stat_smooth(method = "lm", col = "red")+
+  stat_smooth(method = "lm", col = "indianred1")+
   ylab("Marginal Cost of Abatement (Sector A)")+
   theme_classic()
 
 ggplot(emissions, aes(x = Abatement, y = MC_B)) + 
   geom_point() +
-  stat_smooth(method = "lm", col = "blue")+
+  stat_smooth(method = "lm", col = "olivedrab3")+
   ylab("Marginal Cost of Abatement (Sector B)")+
   theme_classic()
 
 ggplot(emissions, aes(x = Abatement, y = MC_C)) + 
   geom_point() +
-  stat_smooth(method = "lm", col = "green")+
+  stat_smooth(method = "lm", col = "turquoise3")+
   ylab("Marginal Cost of Abatement (Sector C)")+
   theme_classic()
 
 ggplot(emissions, aes(x = Abatement, y = MC_D)) + 
   geom_point() +
-  stat_smooth(method = "lm", col = "black")+
+  stat_smooth(method = "lm", col = "orchid3")+
   ylab("Marginal Cost of Abatement (Sector D)")+
   theme_classic()
 
@@ -108,32 +109,14 @@ ggplot(emissions, aes(x = Abatement, y = MC_D)) +
 #Sector C is willing to pay the most for the first unit, because they have the largest y intercept??
 
 
-#find xint
-#y = 0.57684 x - 8.64448
-(95.18672 - 0)/0.57684
-#(165.0141, 0)
-
-#y = 0.19874 x + 9.31770
-(49.0657-0)/ 0.19874
-#(246.8839, 0)
-
-#y = 0.78383 x - 11.65503
-(160.7876-0)/0.78383
-#(205.1307, 0)
-
-#y = 0.25993 x + 9.68751
-(87.66651 -0)/0.25993
-#(337.2697,0)
-
-
 #no idea what this does but it was in the other code - making a dataset of points along the demand curve?
-demanda<-Hmisc::bezier(x = c(0, 165.0141), y = c(95.18672, 0)) %>% as_data_frame()
+demanda<-Hmisc::bezier(x = c(0, 180), y = c(95.18672, 0)) %>% as_data_frame()
 #y = -0.57684 x + 95.18672
-demandb<- Hmisc::bezier(x = c(0, 246.8839), y = c(49.0657, 0)) %>% as_data_frame()
+demandb<- Hmisc::bezier(x = c(0, 200), y = c(49.0657, 0)) %>% as_data_frame()
 #y = -0.19874 x + 49.0657
-demandc<-Hmisc::bezier(x = c(0, 205.1307), y = c(160.7876, 0)) %>% as_data_frame()
+demandc<-Hmisc::bezier(x = c(0, 220), y = c(160.7876, 0)) %>% as_data_frame()
 #y = -0.78383 x + 160.7876
-demandd<- Hmisc::bezier(x = c(0, 337.2697), y = c(87.66651, 0)) %>% as_data_frame()
+demandd<- Hmisc::bezier(x = c(0, 300), y = c(87.66651, 0)) %>% as_data_frame()
 #y = -0.25993 x + 87.66651
 
 demanda$type<- rep("Sector A", length(demanda$x))
@@ -190,6 +173,7 @@ Aggregate_Tax = (617.0287 - 300) /8
 # MC_abc=(x+15.20)/8 (Sum of MC for a, b, and c)
 MC_abc=(300+15.20)/8
 
+MC_abc
 ```
 
 ### c. Cap and Trade

@@ -171,9 +171,39 @@ Tc100 = TCa100 +TCb100+ TCc100
 Aggregate_Tax = (617.0287 - 300) /8
 # x= 8y-15.20 or y=(x+15.20)/8
 # MC_abc=(x+15.20)/8 (Sum of MC for a, b, and c)
-MC_abc=(300+15.20)/8
+MC_abc=(300+15.20)/8 # When abatement = 300
 
 MC_abc
+
+# Revenue tax
+# Equal tax price times emissions
+revenue_tax= 300*MC_abc
+
+# Marginal cost equations for each sector
+MC_a= function(x){
+  (0.57684*x - 8.64448)
+}
+
+MC_b= function(x){
+  (0.19874 * x + 9.31770)
+}
+
+MC_c= function(x){
+  (0.78383 * x - 11.65503)
+}
+
+MC_d= function(x){
+  (0.25993 * x + 9.68751)
+}
+
+# Cost for each sector of country X
+cost_a_tax= integrate(MC_a, 0, 84.3)$value # 1320.9
+cost_b_tax=integrate(MC_b, 0, 150.4)$value # 3649.1
+cost_c_tax= integrate(MC_c, 0, 66.7)$value # 966.2
+
+# Total cost
+cost_total_tax = cost_a_tax + cost_b_tax + cost_c_tax # 5936.3
+
 ```
 
 ### c. Cap and Trade
@@ -182,7 +212,10 @@ MC_abc
 # 1. every sector needs to have the same abatement cost
 # 2. total abatement needs to equal 300
 
-abate_a = (MC_abc+8.65)/0.57 #84.3
+# need to make assumption about 
+# units in terms of abatement
+
+abate_a = (MC_abc+8.65)/0.57 #84.3 
 abate_b = (MC_abc-9.32)/0.2 #150.4
 abate_c = (MC_abc+12.66)/0.78 #66.7
 

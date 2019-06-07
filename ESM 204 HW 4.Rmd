@@ -157,11 +157,11 @@ MCc100= (-0.78383*100) + 160.7876
 #82
 
 #Find area under demand curve for x=0-100. Add area of rectange and triangle together
-TCa100 = (100*MCa100)+((95.18672- MCa100)*100*.5)
-TCb100 = (100*MCb100)+((49.0657- MCb100)*100*.5)
-TCc100 = (100*MCc100)+((160.7876- MCc100)*100*.5)
+TCa100 = (100*MCa100)+((95.18672- MCa100)*100*.5) # 6634.5
+TCb100 = (100*MCb100)+((49.0657- MCb100)*100*.5) # 3912.9
+TCc100 = (100*MCc100)+((160.7876- MCc100)*100*.5) # 12159.6
 
-Tc100 = TCa100 +TCb100+ TCc100
+Tc100 = TCa100 +TCb100+ TCc100 # 22707.0
 
 ```
 
@@ -201,11 +201,11 @@ cost_a_tax= integrate(MC_a, 0, 84.3)$value # 1320.9
 cost_b_tax=integrate(MC_b, 0, 150.4)$value # 3649.1
 cost_c_tax= integrate(MC_c, 0, 66.7)$value # 966.2
 
-# Total cost
+# Total cost of tax
 cost_total_tax = cost_a_tax + cost_b_tax + cost_c_tax # 5936.3
 
 ```
-
+$MC_agg={}{}$
 ### c. Cap and Trade
 ```{r}
 # to stop trade two things need to happen
@@ -221,6 +221,20 @@ abate_c = (MC_abc+12.66)/0.78 #66.7
 
 # Check abatement in each sector equals 300
 abate_abc = abate_a +abate_b + abate_c
+
+# Units bought by each sector
+# Each sector needed needed to abate 100 units
+bought_a = 100-84.3
+bought_b = 100-150.4
+bought_c =100-66.7
+
+# Find cost per sector
+cost_a_trade = (bought_a*MC_abc) + cost_a_tax # 1939.5
+cost_b_trade = (bought_b*MC_abc) + cost_b_tax # 1663.1
+cost_c_trade = (bought_c*MC_abc) + cost_c_tax # 2278.2
+
+# Find total cost
+cost_total_trade = cost_a_trade + cost_b_trade + cost_c_trade # 5881.1
 ```
 
 ##Part 4
